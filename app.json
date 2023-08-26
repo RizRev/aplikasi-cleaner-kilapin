@@ -1,0 +1,47 @@
+{
+  "expo": {
+    "name": "Kilapartner",
+    "slug": "cleaner-fe-2",
+    "version": "1.1.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.prodigium.cleanerfe2",
+      "versionCode":10,
+      "config": {
+        "googleMaps": {
+          "apiKey":"AIzaSyAuyS1LLibOZOGt-eliwsfzzTSYb3fVkmQ"
+
+        }
+      },
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "CAMERA"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "cda85c97-1d28-4226-9238-85a2658bcc14"
+      }
+    }
+  }
+}
