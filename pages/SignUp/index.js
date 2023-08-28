@@ -35,28 +35,28 @@ const validationSchema = Yup.object().shape({
 
 const SignUp = ({navigation}) => {
   const handleSignUp = async (values) => {
-    console.log(values);
-    console.log(selectedOption)
-    console.log(selectedIndex)
-    try {
-      console.log("menajalankan signup")
-      const link = `https://cleaner.kilapin.com/users/register`
-      const response = await fetch(link, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(values),
-      });
-      const data = await response.json();
-      console.log('Response data:', data);
+    // console.log(values);
+    // console.log(selectedOption)
+    // console.log(selectedIndex)
+    // try {
+    //   console.log("menajalankan signup")
+    //   const link = `https://backend-api.com/users/register`
+    //   const response = await fetch(link, {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify(values),
+    //   });
+    //   const data = await response.json();
+    //   console.log('Response data:', data);
       navigation.navigate('Done')
-        if (data.data) {
-        console.log('Response data:',data.data.nik);
-      } 
-    } catch (error) {
-      console.error("ini error",error);
-    }
+    //     if (data.data) {
+    //     console.log('Response data:',data.data.nik);
+    //   } 
+    // } catch (error) {
+    //   console.error("ini error",error);
+    // }
   };
 
 const buttons = ['Iya', 'Tidak'];

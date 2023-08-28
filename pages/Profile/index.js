@@ -27,15 +27,23 @@ const Profile = ({navigation}) => {
   const dispatch = useDispatch();
   const login = useSelector(state => state.auth.login);
   console.log('ini login',login)
-  const [name, setName] = useState(login.userId.name)
-  const [phone, setPhone] = useState(login.userId.phone)
+  const [name, setName] = useState('Achmad Rizky Revanda')
+  const [phone, setPhone] = useState('85814735655')
   const [history, setHistory] = useState('')
   const [profile, setProfile] = useState(login.userId.photo_user)
+  const data = [{
+    order_id: '123123',
+    address: 'Jakarta Selatan',
+    cleaner_balance:'1000',
+    time:'10:00'
+  }]
 
 
   useEffect(() => {
-    // fetchMemberData()
-    fetchHistoryData()
+    console.log(history)
+    setHistory(data)
+  //   // fetchMemberData()
+  //   fetchHistoryData()
   },[])
 
     // const fetchMemberData = async () => {
@@ -53,24 +61,24 @@ const Profile = ({navigation}) => {
     //     Alert.alert(error)
     //   }
     // }
-    const fetchHistoryData = async () => {
-      try {
-        console.log("menjalankan get order")
-        const id = await AsyncStorage.getItem('id')
-        console.log(id)
-        const link = `https://cleaner.kilapin.com/order/history-order/${id}`
-        console.log(link)
-        const response = await fetch(link)
-        const data = await response.json()
-        const orders = data.data
-        // console.log('histori order',orders)
-        const orders1 = orders.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-        setHistory(orders1)
-        console.log("ini data history",data)
-      } catch (error) {
-        console.log(error)
-      }
-    }
+    // const fetchHistoryData = async () => {
+    //   try {
+    //     console.log("menjalankan get order")
+    //     const id = await AsyncStorage.getItem('id')
+    //     console.log(id)
+    //     const link = `https://backend-api.com/order/history-order/${id}`
+    //     console.log(link)
+    //     const response = await fetch(link)
+    //     const data = await response.json()
+    //     const orders = data.data
+    //     // console.log('histori order',orders)
+    //     const orders1 = orders.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+    //     setHistory(orders1)
+    //     console.log("ini data history",data)
+    //   } catch (error) {
+    //     console.log(error)
+    //   }
+    // }
 
     const handleLogout = async () => {
       console.log('menjalankan logout')
@@ -78,7 +86,7 @@ const Profile = ({navigation}) => {
       // const profile = await AsyncStorage.removeItem('profile')
       // await AsyncStorage.removeItem('phone')
       // await AsyncStorage.removeItem('id')
-      dispatch(AuthActions.authentication(false));
+      // dispatch(AuthActions.authentication(false));
       // await AsyncStorage.setItem('Login','false')
       navigation.navigate("Login")
     }

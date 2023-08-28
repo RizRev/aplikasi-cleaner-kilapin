@@ -11,7 +11,7 @@ const Splash = ({navigation}) => {
 }, []);
 return (
   <View style={styles.background}>
-      {/* <LottieView 
+      <LottieView 
       source={require('../../assets/animation/kilapinwithtagline.json')}
       autoPlay
       loop
@@ -26,7 +26,7 @@ return (
       style={{
           height: hp('5%'),
           marginBottom: hp('4%')
-      }}/> */}
+      }}/>
   </View>
 )
 }

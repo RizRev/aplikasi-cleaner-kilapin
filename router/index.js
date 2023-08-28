@@ -20,14 +20,13 @@ const MainApp = () => {
 const Router = () => {
     return (
     <Stack.Navigator>
-         <Stack.Screen name="MainApp" component={MainApp} options={{headerShown: false}}/>
+        <Stack.Screen name="GetStarted" component={GetStarted} options={{headerShown: false}}/>
         <Stack.Screen name="Splash" component={Splash} options={{headerShown: false}} />
+        <Stack.Screen name="MainApp" component={MainApp} options={{headerShown: false}}/>
         <Stack.Screen name="Camera" component={Camera} options={{headerShown: false}}/>
         <Stack.Screen name="Done" component={Done} options={{headerShown: false}}/>
         <Tab.Screen name="Chat" component={Chat} options={{headerShown: false}}/>
-        <Stack.Screen name="GetStarted" component={GetStarted} options={{headerShown: false}}/>
         <Stack.Screen name="NavOne" component={NavOne} options={{headerShown: false}}/>
-       
         <Stack.Screen name="Login" component={Login} options={{headerShown: false}}/>
         <Stack.Screen name="SignUp" component={SignUp} options={{headerShown: false}}/>
         <Stack.Screen name="Photo" component={Photo} options={{headerShown: false}}/>

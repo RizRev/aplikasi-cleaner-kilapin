@@ -11,7 +11,12 @@ import {ApplicationActions} from '@actions';
 const NavOne = ({route,navigation}) => {
   const login = useSelector(state => state.auth.login);
   const dispatch = useDispatch();
-  const {order_id} = route.params
+  const {order_id} = route?.params
+  if (order_id) {
+    console.log('ini order id',order_id)
+  } else {
+    console.log('ini gak ada order id nya')
+  }
   const [loading, setLoading] = useState(false);
   const handlePhotoUpload = async (uri,statusPhoto) => {
     console.log('status photo upload',statusPhoto)
@@ -37,7 +42,7 @@ const NavOne = ({route,navigation}) => {
   
       if (response && response.data.secure_url) {
         console.log('data dikirim',image,order_id,statusPhoto)
-        const link = `https://cleaner.kilapin.com/order/photo-order`
+        const link = `https://backend-api.com/order/photo-order`
         const response = await fetch(link, {
           method: 'POST',
           headers: {
@@ -62,8 +67,8 @@ const NavOne = ({route,navigation}) => {
       // setLoading(false);
     }
   };
-  const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/dtyji62ve/image/upload?folder=PhotoOrder';
-  const CLOUDINARY_PRESET = 'yjjew3l8';
+  const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/dtyji6221/image/upload?folder=PhotoOrder';
+  const CLOUDINARY_PRESET = 'yjjew332';
   const [image, setImage] = useState(null);
 
   const showActionSheet = () => {
@@ -116,28 +121,28 @@ const NavOne = ({route,navigation}) => {
   useEffect(() => {
     handlePermission();
   }, []);
-  useEffect(() => {
-    const handleOrder = async () => {
-      try {
-        // console.log(order_id)
-        const link = `https://cleaner.kilapin.com/order/detail/${order_id}`;
-        const response = await fetch(link);
-        const data = await response.json();
-        console.log("Order Detail:", data.data);
-        setOrderDetail(data.data);
-      } catch (error) {
-        console.log('Error while fetching order detail:', error);
-      }
-    };
-    handleOrder();
+  // useEffect(() => {
+  //   const handleOrder = async () => {
+  //     try {
+  //       // console.log(order_id)
+  //       const link = `https://backend-api.com/order/detail/${order_id}`;
+  //       const response = await fetch(link);
+  //       const data = await response.json();
+  //       console.log("Order Detail:", data.data);
+  //       setOrderDetail(data.data);
+  //     } catch (error) {
+  //       console.log('Error while fetching order detail:', error);
+  //     }
+  //   };
+  //   handleOrder();
   
-    const intervalId = setInterval(() => {
-      setCount(count => count + 1);
-    }, 3000);
-  return () => clearInterval(intervalId);
-  }, [
-    count
-  ]);
+  //   const intervalId = setInterval(() => {
+  //     setCount(count => count + 1);
+  //   }, 3000);
+  // return () => clearInterval(intervalId);
+  // }, [
+  //   count
+  // ]);
 
   const pickImage = async (statusPhoto) => {
     try {
@@ -195,35 +200,36 @@ const NavOne = ({route,navigation}) => {
   
   // Panggil fungsi handlePermission di useEffect untuk meminta izin saat komponen di-mount.
   useEffect(() => {
+    setOrderDetail(order_id)
     handlePermission();
   }, []);
-  useEffect(() => {
-    const handleOrder = async () => {
-      try {
-        // console.log(order_id)
-        const link = `https://cleaner.kilapin.com/order/detail/${order_id}`;
-        const response = await fetch(link);
-        const data = await response.json();
-        // console.log("Order Detail:", data.data);
-        if (data) {
-          setOrderDetail(data.data);
-        } else {
-          navigation.navigate("Home");
-        }
+  // useEffect(() => {
+  //   const handleOrder = async () => {
+  //     try {
+  //       // console.log(order_id)
+  //       const link = `https://backend-api.com/order/detail/${order_id}`;
+  //       const response = await fetch(link);
+  //       const data = await response.json();
+  //       // console.log("Order Detail:", data.data);
+  //       if (data) {
+  //         setOrderDetail(data.data);
+  //       } else {
+  //         navigation.navigate("Home");
+  //       }
         
-      } catch (error) {
-        console.log('Error while fetching order detail:', error);
-      }
-    };
-    handleOrder();
+  //     } catch (error) {
+  //       console.log('Error while fetching order detail:', error);
+  //     }
+  //   };
+  //   handleOrder();
   
-    const intervalId = setInterval(() => {
-      setCount(count => count + 1);
-    }, 5000);
-  return () => clearInterval(intervalId);
-  }, [
-    count
-  ]);
+  //   const intervalId = setInterval(() => {
+  //     setCount(count => count + 1);
+  //   }, 5000);
+  // return () => clearInterval(intervalId);
+  // }, [
+  //   count
+  // ]);
 
   const handleSearch = async (item) => {
     try {
@@ -257,7 +263,7 @@ const NavOne = ({route,navigation}) => {
     const handleOrderStatusUpdate = async (newStatus) => {
       console.log(newStatus)
       try {
-        const link = `https://customer.kilapin.com/order/status/${newStatus}/${order_id}`;
+        const link = `https://backend-api.com/order/status/${newStatus}/${order_id}`;
         const response = await fetch(link, {
           method: 'GET',
           headers: {
@@ -454,7 +460,9 @@ const NavOne = ({route,navigation}) => {
         <View style={{height:'10%',flexDirection: 'row',justifyContent:'space-between'}}>
           <View style={{width: '40%',borderColor:'#dd7de1',height:'80%',borderWidth:2,borderRadius:20}}>
           <TouchableOpacity 
-          onPress={() => navigation.navigate("Chat",{order_id: orderDetail.order_id,profile: login})}
+          onPress={() => navigation.navigate("Chat"
+          ,{order_id: orderDetail.order_id,profile: orderDetail.user_id}
+          )}
           style={{justifyContent:'center',alignItems:'center',height:'100%'}
         }>
           <Text 

@@ -3,11 +3,11 @@ import React, { useEffect,useState } from 'react'
 import { TextInput } from 'react-native-gesture-handler'
 import Gap from '../../components/Gap'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen'
-import { useNavigation } from '@react-navigation/native'
+// import { useNavigation } from '@react-navigation/native'
 import LottieView from 'lottie-react-native'
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {auth} from '../../config/index';
-import { signInWithEmailAndPassword } from 'firebase/auth'
+// import AsyncStorage from '@react-native-async-storage/async-storage';
+// import {auth} from '../../config/index';
+// import { signInWithEmailAndPassword } from 'firebase/auth'
 import * as actionTypes from '../../actions/actionTypes';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -45,41 +45,41 @@ const Login = ({navigation}) => {
   };
 
   const handleLogin = async () => {
-    try {
+    // try {
       console.log("menajalankan login")
-      dispatch(loginStart()); // Dispatch login start action
-      const link = `https://cleaner.kilapin.com/users/login`
-      const response = await fetch(link, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          phone,
-          password,
-        }),
-      });
-      const data = await response.json();
-      console.log('Response data:', data.data);
-        if (data.data) {
-          console.log("Data Login : ",JSON.stringify(data.data));
+      // dispatch(loginStart()); // Dispatch login start action
+      // const link = `https://backend-api.com/users/login`
+      // const response = await fetch(link, {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify({
+      //     phone,
+      //     password,
+      //   }),
+      // });
+      // const data = await response.json();
+      // console.log('Response data:', data.data);
+      //   if (data.data) {
+      //     console.log("Data Login : ",JSON.stringify(data.data));
         // await AsyncStorage.setItem('id', data.data._id);
-        dispatch(loginSuccessAction(data.data)); // Dispatch login success action with the response data
+        // dispatch(loginSuccessAction(data.data)); // Dispatch login success action with the response data
         // await AsyncStorage.setItem('name', data.data.name);
         // await AsyncStorage.setItem('phone', data.data.phone);
         // console.log('Response data:', data.data.id);
-        if (data.data.photo_user !== null) {
+        // if (data.data.photo_user !== null) {
           // await AsyncStorage.setItem('profile', data.data.photo_user)
-        }
+        // }
         // await AsyncStorage.setItem('Login','true')
         navigation.navigate('MainApp')
-      } 
-      else {
-        setErrorMessage(data.message);
-      }
-    } catch (error) {
-      console.error(error);
-    }
+      // } 
+      // else {
+      //   setErrorMessage(data.message);
+      // }
+    // } catch (error) {
+    //   console.error(error);
+    // }
   };
 
 

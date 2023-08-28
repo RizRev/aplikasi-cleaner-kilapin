@@ -31,7 +31,7 @@ const [refreshCount, setRefreshCount] = useState(0);
 // useEffect(() => {
 //     const fetchOrderUrgent = async () => {
 //       try {
-//         const link = `https://cleaner.kilapin.com/order/get-order/${cleaner_id}`
+//         const link = `https://backend-api.com/order/get-order/${cleaner_id}`
 //         const response = await fetch(link)
 //         const data = await response.json()
 //         console.log('data urgent',data.data)
@@ -54,7 +54,7 @@ const [refreshCount, setRefreshCount] = useState(0);
     })
     const fetchOrderBooked = async () => {
       try {
-        const link1 = `https://cleaner.kilapin.com/order/get-order/${cleaner_id}`
+        const link1 = `https://backend-api.com/order/get-order/${cleaner_id}`
         const response1 = await fetch(link1)
         const data1 = await response1.json()
         setBooked(data1.data)

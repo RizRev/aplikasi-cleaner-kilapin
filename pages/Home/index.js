@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+// import AsyncStorage from '@react-native-async-storage/async-storage';
 import {LinearGradient} from 'expo-linear-gradient';
 import {
   widthPercentageToDP as wp,
@@ -8,53 +8,70 @@ import {
 import { Text, StyleSheet, View, Switch,SafeAreaView,BackHandler } from 'react-native';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 const colors = ['#F05941']
-import * as Location from 'expo-location'
-import axios from 'axios';
-import { useFocusEffect } from '@react-navigation/native';
-import Pusher from 'pusher-js';
-import { useDispatch, useSelector } from 'react-redux';
-import {ApplicationActions} from '@actions';
+// import * as Location from 'expo-location'
+// import axios from 'axios';
+// import { useFocusEffect } from '@react-navigation/native';
+// import Pusher from 'pusher-js';
+// import { useDispatch, useSelector } from 'react-redux';
+// import {ApplicationActions} from '@actions';
 
 const Home = ({ navigation, route }) => {
+  const data = {
+    status: 'Placement',
+    order_id: '123123',
+    address: 'Jakarta Selatan',
+    cleaner_balance:'Rp 8.000.000',
+    time:'10:00',
+    service_id:{
+      description:'10 - 15 m2',
+      option:'Marble & Granite'
+    },
+    user_id:{
+      name: 'Achmad Rizky Revanda'
+
+    }
+  }
   useEffect(() =>{
-    fetchLoginStatus()
+    // fetchLoginStatus()
+    setTempBook(data)
+    setBooked(data)
 }, []);
-  const fetchLoginStatus = async() => {
-    console.log('splash')
-    // await AsyncStorage.setItem('Login','false')
-    // const status = await AsyncStorage.getItem('Login')
-    setTimeout(() => {
-      if (status==='true') {
-        navigation.navigate('MainApp',{screen:'profile'})
-      } else {
-        navigation.navigate('Login')
-      }
-    }, 500)
-  }
-  const dispatch = useDispatch();
-  const [booking, setBooked] = useState(null);
+//   const fetchLoginStatus = async() => {
+//     console.log('splash')
+//     // await AsyncStorage.setItem('Login','false')
+//     // const status = await AsyncStorage.getItem('Login')
+//     setTimeout(() => {
+//       if (status==='true') {
+//         navigation.navigate('MainApp',{screen:'profile'})
+//       } else {
+//         navigation.navigate('Login')
+//       }
+//     }, 500)
+//   }
+  // const dispatch = useDispatch();
+  const [booking, setBooked] = useState('');
   const [temp, setTempBook] = useState(null);
-  const [tempUrgent, setTempUrgent] = useState(null);
-  const [count, setCount] = useState(0);
-  const [location, setLocation] = useState(null);
-  const [cleanerID,setCleanerID] = useState('')
-  const [name,setName] = useState('')
-  let userId;
-  const [timeoutId, setTimeoutId] = useState(null); // For storing the timeout ID
+  // const [tempUrgent, setTempUrgent] = useState(null);
+  // const [count, setCount] = useState(0);
+  // const [location, setLocation] = useState(null);
+  // const [cleanerID,setCleanerID] = useState('')
+  // const [name,setName] = useState('')
+  // let userId;
+  // const [timeoutId, setTimeoutId] = useState(null); // For storing the timeout ID
 
-  const login = useSelector(state => state.auth.login);
-  const order = useSelector(state => state.application.booking)
+  // const login = useSelector(state => state.auth.login);
+  // const order = useSelector(state => state.application.booking)
 
-  console.log('redux order',order)
-  console.log('booking order',booking)
-  console.log('temp order',temp)
+  // console.log('redux order',order)
+  // console.log('booking order',booking)
+  // console.log('temp order',temp)
 
 
-  if (login) {
-    userId = useSelector(state => state.auth.login.userId._id);
-    console.log("TEDD : ",userId);
+  // if (login) {
+  //   userId = useSelector(state => state.auth.login.userId._id);
+  //   console.log("TEDD : ",userId);
   
-  }
+  // }
   // const urgent = useSelector(state => state.application.urgent);
   // if (urgent) {
   //   console.log("ADA REDUX URGENT : ",urgent);
@@ -62,176 +79,176 @@ const Home = ({ navigation, route }) => {
   // }
   
 
-  console.log("ILHAM : ",userId);
-  useEffect(() => {
-    (async () => {
-      const { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== 'granted') {
-        Alert.alert('Permission denied', 'You need to grant location permission to use this feature.');
-      }
-    })();
-  }, []);
+  // console.log("ILHAM : ",userId);
+  // useEffect(() => {
+  //   (async () => {
+  //     const { status } = await Location.requestForegroundPermissionsAsync();
+  //     if (status !== 'granted') {
+  //       Alert.alert('Permission denied', 'You need to grant location permission to use this feature.');
+  //     }
+  //   })();
+  // }, []);
 
-  const pusher = new Pusher('a6c67c80d1f30f9f4710', {
-    cluster: 'ap1',
-    // Add other options as needed
-  });
+  // const pusher = new Pusher('a6c67c80d1f30f9f4710', {
+  //   cluster: 'ap1',
+  //   // Add other options as needed
+  // });
 
-    const channel = pusher.subscribe('order-on-going');
-    let dataTimeoutId;
+    // const channel = pusher.subscribe('order-on-going');
+    // let dataTimeoutId;
 
-    useEffect(() => {
-      // setBooked(null)
-      if (order) {
-        setBooked(order)
-      }
-      // Subscription setup for Pusher
-      const pusher = new Pusher('a6c67c80d1f30f9f4710', {
-        cluster: 'ap1',
-        // Add other options as needed
-      });
+    // useEffect(() => {
+    //   // setBooked(null)
+    //   if (order) {
+    //     setBooked(order)
+    //   }
+    //   // Subscription setup for Pusher
+    //   const pusher = new Pusher('a6c67c80d1f30f9f4710', {
+    //     cluster: 'ap1',
+    //     // Add other options as needed
+    //   });
   
-      const channel = pusher.subscribe('order-on-going');
-      let dataTimeoutId;
+    //   const channel = pusher.subscribe('order-on-going');
+    //   let dataTimeoutId;
   
-      channel.bind(`${userId}`, (data) => {
-        console.log('Received event:', JSON.stringify(data));
-        clearTimeout(dataTimeoutId);
-        if (data) {
-          if (data.booking_type === 'Urgent') {
-            // Handle "Urgent" orders with a 20-second timeout
-            setTempBook(data);
-            console.log('data set temp book',temp)
-            dataTimeoutId = setTimeout(() => {
-              setTempBook(null);
-              console.log('Data cleared due to inactivity.');
-            }, 20000); // 20 seconds
-            console.log('Order dispatched as Urgent:', data);
-            setTempBook(data);
-            setBooked(data);
-            dispatch(ApplicationActions.onAddUrgent(data));
-          } else if(data.booking_type === 'Booking' || data.status === 'Placement'){
-            // For other booking types, dispatch to onAddBooking directly
-            dispatch(ApplicationActions.onClearUrgent());
-            setBooked(null);
-            console.log('Order dispatched to onAddBooking:', data);
-          } else if (data.booking_type === 'Booking' && data.status !== 'Placement') {
+    //   channel.bind(`${userId}`, (data) => {
+    //     console.log('Received event:', JSON.stringify(data));
+    //     clearTimeout(dataTimeoutId);
+    //     if (data) {
+    //       if (data.booking_type === 'Urgent') {
+    //         // Handle "Urgent" orders with a 20-second timeout
+    //         setTempBook(data);
+    //         console.log('data set temp book',temp)
+    //         dataTimeoutId = setTimeout(() => {
+    //           setTempBook(null);
+    //           console.log('Data cleared due to inactivity.');
+    //         }, 20000); // 20 seconds
+    //         console.log('Order dispatched as Urgent:', data);
+    //         setTempBook(data);
+    //         setBooked(data);
+    //         dispatch(ApplicationActions.onAddUrgent(data));
+    //       } else if(data.booking_type === 'Booking' || data.status === 'Placement'){
+    //         // For other booking types, dispatch to onAddBooking directly
+    //         dispatch(ApplicationActions.onClearUrgent());
+    //         setBooked(null);
+    //         console.log('Order dispatched to onAddBooking:', data);
+    //       } else if (data.booking_type === 'Booking' && data.status !== 'Placement') {
             
-          }
-        }
-      });
+    //       }
+    //     }
+    //   });
   
-      // Clean up the channel subscription when unmounting the component
-      return () => {
-        clearTimeout(dataTimeoutId);
-        pusher.unsubscribe('order-on-going');
-      };
-    }, [userId]);
+    //   // Clean up the channel subscription when unmounting the component
+    //   return () => {
+    //     clearTimeout(dataTimeoutId);
+    //     pusher.unsubscribe('order-on-going');
+    //   };
+    // }, [userId]);
   
-    console.log("DATA BOOKING REVAN : ", booking);
-    console.log("DATA URGENT REVAN : ", temp);
+    // console.log("DATA BOOKING REVAN : ", booking);
+    // console.log("DATA URGENT REVAN : ", temp);
 
     const handleOrder = async (orderId) => {
-      try {
-        console.log('handle claim',orderId,userId)
-        if (booking.status === 'Open'||temp.status === 'Open') {
-          console.log('menjalankan claim order', orderId);
+//       try {
+//         console.log('handle claim',orderId,userId)
+//         if (booking.status === 'Open'||temp.status === 'Open') {
+//           console.log('menjalankan claim order', orderId);
   
-          const response = await fetch(`https://cleaner.kilapin.com/order/claim-order/${orderId}/${userId}`);
-          const data = await response.json();
+//           const response = await fetch(`https://backend-api.com/order/claim-order/${orderId}/${userId}`);
+//           const data = await response.json();
   
-          // Clear the previous timeout when handleOrder is executed
-          clearTimeout(dataTimeoutId);
-          setTempBook(null);
-          setBooked(null);
-          // booking = data; // Store the data in the accessible scope
+//           // Clear the previous timeout when handleOrder is executed
+//           clearTimeout(dataTimeoutId);
+//           setTempBook(null);
+//           setBooked(null);
+//           // booking = data; // Store the data in the accessible scope
   
-          console.log('claim order', data);
+//           console.log('claim order', data);
           
-        } else {
-          console.log('Cannot claim order. The status is not Open.');
-        }
-      } catch (error) {
-        console.log(error);
-      }
+//         } else {
+//           console.log('Cannot claim order. The status is not Open.');
+//         }
+//       } catch (error) {
+//         console.log(error);
+//       }
     };
 
-  useEffect(() => {
-    (async () => {
-      const { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== 'granted') {
-        Alert.alert('Permission denied', 'You need to grant location permission to use this feature.');
-      }
-    })();
-  }, []);
+//   useEffect(() => {
+//     (async () => {
+//       const { status } = await Location.requestForegroundPermissionsAsync();
+//       if (status !== 'granted') {
+//         Alert.alert('Permission denied', 'You need to grant location permission to use this feature.');
+//       }
+//     })();
+//   }, []);
     const [isEnabled, setIsEnabled] = useState(false);
     const [status, setStatus] = useState('');
     const toggleSwitch = async () => {
       setIsEnabled(previousState => !previousState);
       setStatus(isEnabled ? "On" : "Off");
-    // Mendapatkan waktu saat ini dalam UTC
-const currentTimeUTC = new Date();
+//     // Mendapatkan waktu saat ini dalam UTC
+// const currentTimeUTC = new Date();
 
 // Menyesuaikan dengan perbedaan zona waktu GMT+7 (420 menit)
-const gmtOffsetInMinutes = 0;
-const currentTimeGMTPlus7 = new Date(currentTimeUTC.getTime() + gmtOffsetInMinutes * 60000);
+// const gmtOffsetInMinutes = 0;
+// const currentTimeGMTPlus7 = new Date(currentTimeUTC.getTime() + gmtOffsetInMinutes * 60000);
 
 // Mendapatkan jam, menit, dan detik dari waktu GMT+7
-const hours = currentTimeGMTPlus7.getHours();
-const minutes = currentTimeGMTPlus7.getMinutes();
-const seconds = currentTimeGMTPlus7.getSeconds();
+// const hours = currentTimeGMTPlus7.getHours();
+// const minutes = currentTimeGMTPlus7.getMinutes();
+// const seconds = currentTimeGMTPlus7.getSeconds();
 // Mendapatkan hari dalam bahasa Inggris (0: Minggu, 1: Senin, dst.)
-const dayOfWeek = currentTimeGMTPlus7.getDay();
+// const dayOfWeek = currentTimeGMTPlus7.getDay();
 
 // Mendapatkan tanggal bulan (1-31)
-const dateOfMonth = currentTimeGMTPlus7.getDate();
+// const dateOfMonth = currentTimeGMTPlus7.getDate();
 
 // Mendapatkan bulan dalam bahasa Inggris (0: Januari, 1: Februari, dst.)
-const month = currentTimeGMTPlus7.getMonth();
+// const month = currentTimeGMTPlus7.getMonth();
 
 // Mendapatkan tahun (misal: 2023)
-const year = currentTimeGMTPlus7.getFullYear();
-const { coords } = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.High });
-const { latitude, longitude } = coords;
-const apiKey = 'AIzaSyAuyS1LLibOZOGt-eliwsfzzTSYb3fVkmQ'
-const response = await axios.get(
-  `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apiKey}`
-);
+// const year = currentTimeGMTPlus7.getFullYear();
+// const { coords } = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.High });
+// const { latitude, longitude } = coords;
+// const apiKey = 'AIzaSyAuyS1LLibOZOGt-eliwsfzzTSYb3fVkmQ'
+// const response = await axios.get(
+//   `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apiKey}`
+// );
 
 // Mendapatkan hasil dari respon API
-if (response.data.results.length > 0) {
-  const locationData = response.data.results[0];
-  var formattedAddress = locationData.formatted_address;
-  console.log(formattedAddress);
-}
-setLocation({ latitude, longitude });
-  console.log('waktu yang didapatkan: ',`${dayOfWeek}-${month}-${year}`,`${hours}:${minutes}`,coords)
-  console.log("menajalankan status")
-      const link = `https://cleaner.kilapin.com/order/update-status-urgent`
-      const result = await fetch(link, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: name,
-          cleaner_id: cleanerID,
-          status: status,
-          lat_long: `${latitude},${longitude}`,
-          address: formattedAddress,
-          datetime: `${dateOfMonth}-${month}-${year},${hours}:${minutes}`
-        }),
-      });
-      const data = await result.json();
-      console.log('Response data:', name,cleanerID,data);
+// if (response.data.results.length > 0) {
+//   const locationData = response.data.results[0];
+//   var formattedAddress = locationData.formatted_address;
+//   console.log(formattedAddress);
+// }
+// setLocation({ latitude, longitude });
+//   console.log('waktu yang didapatkan: ',`${dayOfWeek}-${month}-${year}`,`${hours}:${minutes}`,coords)
+//   console.log("menajalankan status")
+//       const link = `https://backend-api.com/order/update-status-urgent`
+//       const result = await fetch(link, {
+//         method: 'POST',
+//         headers: {
+//           'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify({
+//           name: name,
+//           cleaner_id: cleanerID,
+//           status: status,
+//           lat_long: `${latitude},${longitude}`,
+//           address: formattedAddress,
+//           datetime: `${dateOfMonth}-${month}-${year},${hours}:${minutes}`
+//         }),
+//       });
+//       const data = await result.json();
+//       console.log('Response data:', name,cleanerID,data);
   }
-  // const isBookingAvailable = booking !== null;
-  // if (booking) {
-    if (booking) {
-      console.log("Ada Booking!");
-    } else {
-      console.log("Ada Temp!");
-    }
+//   // const isBookingAvailable = booking !== null;
+//   // if (booking) {
+//     if (booking) {
+//       console.log("Ada Booking!");
+//     } else {
+//       console.log("Ada Temp!");
+//     }
   
     return (
       <SafeAreaView style={styles.ContainerMain}>
@@ -280,7 +297,7 @@ setLocation({ latitude, longitude });
                 style={{ height: '100%' }}
                 onPress={() => {
                   handleOrder(booking.order_id);
-                  navigation.navigate('NavOne', { order_id: booking.order_id });
+                  navigation.navigate('NavOne', { order_id: booking });
                 }}
               >
                 <Text

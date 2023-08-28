@@ -19,6 +19,7 @@ const Inbox = () => {
     fetch('https://jsonplaceholder.typicode.com/users')
       .then(response => response.json())
       .then(json => {
+        console.log(JSON.stringify(json))
         setUsers(json);
         setFilteredUsers(json);
       })
@@ -41,7 +42,7 @@ const Inbox = () => {
   const renderItem = ({ item }) => (
     <TouchableOpacity
       style={styles.item}
-      onPress={() => navigation.navigate('Chat')}
+      // onPress={() => navigation.navigate('Chat')}
     >
       <View
         style={styles.avatar}
