@@ -115,14 +115,14 @@ const Profile = ({navigation}) => {
         <Logo style={styles.logo} />
       </LinearGradient>
       <View style={{backgroundColor:'#FFF',borderRadius:100,width:150,height:150,padding:10,position:'absolute',top:155}}>
-        <Image
+        {/* <Image
       source={profile ? { uri: profile } : require('../../assets/user.png')}
       style={{
         width: '100%',
         height: '100%',
         borderRadius:75,
       }}
-    />
+    /> */}
         </View>
       <View style={{justifyContent: 'center', alignItems: 'center'}}>
         <Gap height={80} />

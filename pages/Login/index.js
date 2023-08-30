@@ -108,7 +108,7 @@ const Login = ({navigation}) => {
             </Pressable>
             <View style={styles.accsignup}>
               <Text>Tidak punya akun? &nbsp; </Text>
-              <TouchableOpacity onPress={() => Linking.openURL(`https://forms.gle/TBPYjUemMbqHUzkk9`)} ><Text style={styles.daftartext}>Daftar</Text></TouchableOpacity>
+              <TouchableOpacity onPress={() => navigation.navigate(`SignUp`)} ><Text style={styles.daftartext}>Daftar</Text></TouchableOpacity>
             </View>
             <Gap height={20} />
           </View>
